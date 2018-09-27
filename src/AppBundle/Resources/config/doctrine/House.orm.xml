@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\House" table="house">
+    <indexes>
+      <index name="fk_house_person_idx" columns="person_idperson"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="idhouse_UNIQUE" columns="idhouse"/>
+    </unique-constraints>
+    <id name="idhouse" type="integer" column="idhouse">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="latitude" type="string" column="latitude" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="longitude" type="string" column="longitude" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="name" type="string" column="name" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="photo" type="string" column="photo" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="staticPhoto" type="string" column="static_photo" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="personperson" target-entity="Person" fetch="LAZY">
+      <join-columns>
+        <join-column name="person_idperson" referenced-column-name="idperson"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
