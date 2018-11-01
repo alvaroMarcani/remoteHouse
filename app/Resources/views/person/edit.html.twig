@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <strong>Editar Perfil: </strong><small>{{ person.fullName }}</small>
+            </div>
+            <div class="card-body">
+                <div class="login-form">
+                    {{ form_start(edit_form) }}
+                    {{ form_row(edit_form.name) }}
+                    {{ form_row(edit_form.lastName) }}
+                    {{ form_row(edit_form.birthdate) }}
+                    {{ form_row(edit_form.gender) }}
+                    {{ form_row(edit_form.email) }}
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mx-auto d-block">
+                                <img class="rounded-circle mx-auto d-block" id="image_preview" src="{{ asset('uploads/photos/'~person.photo)|default(asset('assets/images/icon/avatar-big-01.jpg')) }}" alt="" height="100px" width="100px">
+                                {#<img class="rounded-circle mx-auto d-block" src="images/icon/avatar-01.jpg" alt="Card image cap">#}
+                            </div>
+                            {{ form_row(edit_form.photo) }}
+                        </div>
+                    </div>
+
+
+                    {{ form_widget(edit_form) }}
+                    <input class="au-btn au-btn--block au-btn--green m-b-20" type="submit" value="{{ 'save'|trans }}" />
+                    {{ form_end(edit_form) }}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="table-data__tool">
+            <div class="table-data__tool-right">
+                <a class="au-btn au-btn--blue2 btn-sm" href="{{ path('person_show', {'id':person.id}) }}">Regresar</a>
+                {{ form_start(delete_form) }}
+                <input class="au-btn btn-danger btn-sm m-t-5" type="submit" value="Eliminar">
+                {{ form_end(delete_form) }}
+                {#<a class="btn btn-secondary btn-sm" href="{{ path('person_index') }}">Back to the list</a>#}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $("#appbundle_person_photo").change(function() {
+            imagePreview(this);
+        });
+    </script>
+{% endblock %}

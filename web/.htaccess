@@ -12,7 +12,7 @@ DirectoryIndex app.php
 # Options FollowSymlinks
 
 # Disabling MultiViews prevents unwanted negotiation, e.g. "/app" should not resolve
-# to the front controller "/app.php" but be rewritten to "/app.php/app".
+# to the img controller "/app.php" but be rewritten to "/app.php/app".
 <IfModule mod_negotiation.c>
     Options -MultiViews
 </IfModule>
@@ -34,10 +34,10 @@ DirectoryIndex app.php
     RewriteCond %{HTTP:Authorization} .
     RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Redirect to URI without front controller to prevent duplicate content
+    # Redirect to URI without img controller to prevent duplicate content
     # (with and without `/app.php`). Only do this redirect on the initial
     # rewrite by Apache and not on subsequent cycles. Otherwise we would get an
-    # endless redirect loop (request -> rewrite to front controller ->
+    # endless redirect loop (request -> rewrite to img controller ->
     # redirect -> request -> ...).
     # So in case you get a "too many redirects" error or you always get redirected
     # to the start page because your Apache does not expose the REDIRECT_STATUS
@@ -53,14 +53,14 @@ DirectoryIndex app.php
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
 
-    # Rewrite all other queries to the front controller.
+    # Rewrite all other queries to the img controller.
     RewriteRule ^ %{ENV:BASE}/app.php [L]
 </IfModule>
 
 <IfModule !mod_rewrite.c>
     <IfModule mod_alias.c>
         # When mod_rewrite is not available, we instruct a temporary redirect of
-        # the start page to the front controller explicitly so that the website
+        # the start page to the img controller explicitly so that the website
         # and the generated links can still be used.
         RedirectMatch 302 ^/$ /app.php/
         # RedirectTemp cannot be used instead

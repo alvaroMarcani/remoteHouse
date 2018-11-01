@@ -1,0 +1,14 @@
+.ui-datepicker-next { display: none; }
+.ui-datepicker-prev { display: none; }
+.is-invalid{
+    border: 1px solid #ff7575;
+}
+.is-valid{
+    border: 1px solid #63ff69;
+}
+
+.datas{
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}

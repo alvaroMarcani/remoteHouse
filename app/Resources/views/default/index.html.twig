@@ -1,63 +1,246 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block body %}
-    <div id="wrapper">
-        <div id="container">
-            <div id="welcome">
-                <h1><span>Welcome to</span> Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</h1>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
 
-            <div id="status">
-                <p>
-                    <svg id="icon-status" width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1671 566q0 40-28 68l-724 724-136 136q-28 28-68 28t-68-28l-136-136-362-362q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 295 656-657q28-28 68-28t68 28l136 136q28 28 28 68z" fill="#759E1A"/></svg>
+<head>
 
-                    Your application is now ready. You can start working on it at:
-                    <code>{{ base_dir }}</code>
-                </p>
-            </div>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-            <div id="next">
-                <h2>What's next?</h2>
-                <p>
-                    <a href="#" class="btn btn-sm btn-info">hola prbando probando</a>
+    <title>Remote House BO</title>
 
-                    Read the documentation to learn
-                    <a href="https://symfony.com/doc/{{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION')[:3] }}/page_creation.html">
-                        How to create your first page in Symfony
-                    </a>
-                </p>
-            </div>
+    <!-- Bootstrap core CSS -->
+    {#<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">#}
+    <link href="{{ asset('assets/vendor/bootstrap-4.1/bootstrap.min.css') }}" rel="stylesheet" media="all">
 
+    <!-- Custom fonts for this template -->
+    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/simple-line-icons/css/simple-line-icons.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
 
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/device-mockups/device-mockups.min.css') }}">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('assets/css/new-age.min.css') }}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Inicio</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#download">Quienes Somos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#features">Caracteristicas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#contact">Contactos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="{{ path('fos_user_security_login') }}">Iniciar Sesion</a>
+                </li>
+            </ul>
         </div>
     </div>
-{% endblock %}
+</nav>
 
-{% block stylesheets %}
-<style>
-    body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
-    h1, h2 { line-height: 1.2; margin: 0 0 .5em; }
-    h1 { font-size: 36px; }
-    h2 { font-size: 21px; margin-bottom: 1em; }
-    p { margin: 0 0 1em 0; }
-    a { color: #0000F0; }
-    a:hover { text-decoration: none; }
-    code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
-    #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
-    #container { padding: 2em; }
-    #welcome, #status { margin-bottom: 2em; }
-    #welcome h1 span { display: block; font-size: 75%; }
-    #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
-    #icon-book { display: none; }
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-lg-7 my-auto">
+                <div class="header-content mx-auto">
+                    <h1 class="mb-5">RemoteHouse es un servicio pensado en la accesbilidad remota a tu casa ofreciendo facilidades y seguridad en tu ¡Hogar!</h1>
+                    <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">Descubre</a>
+                </div>
+            </div>
+            <div class="col-lg-5 my-auto">
+                <div class="device-container">
+                    <div class="device-mockup iphone6_plus portrait white">
+                        <div class="device">
+                            <div class="screen">
+                                <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                                <img src="{{ asset('assets/img/demo-screen-1.jpg') }}" class="img-fluid" alt="">
+                            </div>
+                            <div class="button" onclick="onRegister()">
+                                <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
-    @media (min-width: 768px) {
-        #wrapper { width: 80%; margin: 2em auto; }
-        #icon-book { display: inline-block; }
-        #status a, #next a { display: block; }
+<section class="download bg-primary text-center" id="download">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2 class="section-heading">Descubre RemoteHouse BO</h2>
+                <p>Somos una empresa dedicada en brindar comodidades para ti en cuanto al manejo de aspectos basicos de tu hogar, ofreciendo seguridad remota al alcance de tu ¡Celular y/o computadora!</p>
+                <p>Registrate y utiliza nuestros servicios o Descarga nuestra aplicacion Movil en:</p>
+                <div class="badges">
+                    <a class="badge-link disabled" ><img src="{{ asset('assets/img/google-play-badge.svg') }}" alt=""></a>
+                    <a class="badge-link disabled" ><img src="{{ asset('assets/img/app-store-badge.svg') }}" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
-        @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
-        .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
+<section class="features" id="features">
+    <div class="container">
+        <div class="section-heading text-center">
+            <h2>¡Comidad, accesibilidad, seguridad y Más!</h2>
+            <p class="text-muted">¿Que esperas?, ¡Unete a nuestra comunidad y prueba nuestras caracteristicas!</p>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 my-auto">
+                <div class="device-container">
+                    <div class="device-mockup iphone6_plus portrait white">
+                        <div class="device">
+                            <div class="screen">
+                                <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                                <img src="{{ asset('assets/img/demo-screen-1.jpg') }}" class="img-fluid" alt="">
+                            </div>
+                            <div class="button" onclick="onRegister()">
+
+                                <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 my-auto">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="icon-screen-smartphone text-primary"></i>
+                                <h3>Diseño Responsivo</h3>
+                                <p class="text-muted">¡Diseñada para el uso desde un celular sin descargar alguna otra aplicacion!</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="icon-home text-primary"></i>
+                                <h3>Control a distancia</h3>
+                                <p class="text-muted">Controla las luces y puertas a distancia con nuestro ¡servicio!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="icon-link text-primary"></i>
+                                <h3>Un link de distancia</h3>
+                                <p class="text-muted">Ingresa a nuestra plataforma y administra luces, puertas, alarmas de tu hogar</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="icon-shield text-primary"></i>
+                                <h3>Seguridad</h3>
+                                <p class="text-muted">Todos tus datos estan seguros en nuestra plataforma, encryptacion de contraseñas y más</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="cta-content">
+        <div class="container">
+            <h2>Contactanos.<br>Asciende con nosotros.</h2>
+            <a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger">¡Quiero saber Más!</a>
+        </div>
+    </div>
+    <div class="overlay"></div>
+</section>
+
+<section class="contact bg-primary" id="contact">
+    <div class="container">
+        <h2>Contactanos, y tomemos un
+            <i class="fas fa-coffee"></i></h2>
+        <ul class="list-inline list-social">
+            <li class="list-inline-item social-twitter">
+                <a >
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </li>
+            <li class="list-inline-item social-facebook">
+                <a >
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </li>
+            <li class="list-inline-item social-google-plus">
+                <a >
+                    <i class="fab fa-google-plus-g"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; RemoteHouse BO 2018. All Rights Reserved.</p>
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <a >Privacidad</a>
+            </li>
+            <li class="list-inline-item">
+                <a >Terminos</a>
+            </li>
+            <li class="list-inline-item">
+                <a >FAQ</a>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+{#<script src="vendor/jquery/jquery.min.js"></script>#}
+<script src="{{ asset('assets/vendor/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/bootstrap-4.1/popper.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/bootstrap-4.1/bootstrap.min.js') }}"></script>
+
+<script src="{{ asset('assets/vendor/bootstrap-4.1/bootstrap.bundle.min.js') }}"></script>
+
+<!-- Plugin JavaScript -->
+<script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+<!-- Custom scripts for this template -->
+<script src="{{ asset('assets/js/new-age.min.js') }}"></script>
+
+<script>
+    function onRegister() {
+        a="{{ path('person_new')|escape('js') }}";
+        window.location=a;
     }
-</style>
-{% endblock %}
+</script>
+
+</body>
+
+</html>
+

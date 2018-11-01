@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cuartos{% endblock %}
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="table-responsive table--no-card m-b-30">
+            <table class="table table-borderless table-striped table-earning">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Door</th>
+                    <th>Light</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tbody>
+                {% for room in rooms %}
+                    <tr>
+                        <td>{{ room.id }}</td>
+                        <td>{{ room.name }}</td>
+                        <td>{% if room.door %}Yes{% else %}No{% endif %}</td>
+                        <td>{% if room.light %}Yes{% else %}No{% endif %}</td>
+                        <td>
+                            <div class="table-data-feature">
+                                <a href="{{ path('room_show', { 'id': room.id }) }}" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver">
+                                    <i class="zmdi zmdi-eye"></i>
+                                </a>
+                                <a href="{{ path('room_edit', { 'id': room.id }) }}" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
+                                    <i class="zmdi zmdi-edit"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>No data</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-data__tool">
+            <div class="table-data__tool-right">
+                <a class="au-btn au-btn--blue2 btn-sm" href="{{ path('room_new') }}">Agregar</a>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

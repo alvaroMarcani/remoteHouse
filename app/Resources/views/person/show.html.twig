@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}{{ person.fullName }}{% endblock %}
+{% block body %}
+
+    <div class="container-fluid">
+
+        <div class="user-data m-b-30">
+            <h3 class="title-3 m-b-30">
+                <i class="zmdi zmdi-account-calendar"></i>Mi Perfil: {{ person.fullName }}</h3>
+            <div class="mx-auto d-block">
+                <img height="200px" width="200px" class="rounded-circle mx-auto d-block" src="{{ asset('uploads/photos/'~person.photo)|default(asset('assets/images/icon/avatar-big-01.jpg')) }}" alt="Card image cap">
+            </div>
+            <div class="top-campaign">
+                <div class="table-responsive">
+                    <table class="table table-top-campaign">
+                        <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ person.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td>{{ person.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Lastname</th>
+                            <td>{{ person.lastName }}</td>
+                        </tr>
+                        <tr>
+                            <th>Birthdate</th>
+                            <td>{% if person.birthdate %}{{ person.birthdate|date('Y-m-d') }}{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <th>Gender</th>
+                            <td>{{ person.gender }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ person.email }}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="table-data__tool">
+            <div class="table-data__tool-right">
+                <a class="au-btn au-btn--blue2 btn-sm" href="{{ path('person_edit', {'id':person.id}) }}">Editar</a>
+                {{ form_start(delete_form) }}
+                <input class="au-btn btn-danger btn-sm m-t-5" type="submit" value="Eliminar">
+                {{ form_end(delete_form) }}
+                {#<a class="btn btn-secondary btn-sm" href="{{ path('person_index') }}">Back to the list</a>#}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

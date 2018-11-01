@@ -1,0 +1,10 @@
+# validators.es.yml
+#FormMessages
+form.notblank: Debe completar este Campo
+form.needchoice: Debe seleccionar una Opcion
+form.email: Necesita un Correo Electronico Valido
+form.dateerror: Necesita Introducir una Fecha Valida
+form.needmapinteraction: Este campo necesita interaccion con el Mapa
+label.haveAccountWarning: ¡Ya tienes una cuenta registrada con este correo!
+conductor.already.picked: ¡Este Conductor ya se encuentra asignado a un Vehiculo!
+

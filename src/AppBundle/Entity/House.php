@@ -3,11 +3,11 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * House
  *
- * @ORM\Table(name="house", uniqueConstraints={@ORM\UniqueConstraint(name="idhouse_UNIQUE", columns={"idhouse"})}, indexes={@ORM\Index(name="fk_house_person_idx", columns={"person_idperson"})})
+ * @ORM\Table(name="house", indexes={@ORM\Index(name="fk_house_person_idx", columns={"id_person"})})
  * @ORM\Entity
  */
 class House
@@ -16,6 +16,7 @@ class House
      * @var string
      *
      * @ORM\Column(name="latitude", type="string", length=100, nullable=false)
+     * @Assert\NotBlank(message="form.notblank")
      */
     private $latitude;
 
@@ -23,6 +24,7 @@ class House
      * @var string
      *
      * @ORM\Column(name="longitude", type="string", length=100, nullable=false)
+     * @Assert\NotBlank(message="form.notblank")
      */
     private $longitude;
 
@@ -30,6 +32,7 @@ class House
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=100, nullable=false)
+     * @Assert\NotBlank(message="form.notblank")
      */
     private $name;
 
@@ -50,22 +53,228 @@ class House
     /**
      * @var integer
      *
-     * @ORM\Column(name="idhouse", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idhouse;
+    private $id;
 
     /**
      * @var \AppBundle\Entity\Person
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Person")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="person_idperson", referencedColumnName="idperson")
+     *   @ORM\JoinColumn(name="id_person", referencedColumnName="id")
      * })
      */
-    private $personperson;
+    private $idPerson;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Room", mappedBy="idHouse")
+     */
+    private $rooms;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->rooms = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
+    /**
+     * Set latitude
+     *
+     * @param string $latitude
+     *
+     * @return House
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return string
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param string $longitude
+     *
+     * @return House
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return string
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return House
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     *
+     * @return House
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set staticPhoto
+     *
+     * @param string $staticPhoto
+     *
+     * @return House
+     */
+    public function setStaticPhoto($staticPhoto)
+    {
+        $this->staticPhoto = $staticPhoto;
+
+        return $this;
+    }
+
+    /**
+     * Get staticPhoto
+     *
+     * @return string
+     */
+    public function getStaticPhoto()
+    {
+        return $this->staticPhoto;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idPerson
+     *
+     * @param \AppBundle\Entity\Person $idPerson
+     *
+     * @return House
+     */
+    public function setIdPerson(\AppBundle\Entity\Person $idPerson = null)
+    {
+        $this->idPerson = $idPerson;
+
+        return $this;
+    }
+
+    /**
+     * Get idPerson
+     *
+     * @return \AppBundle\Entity\Person
+     */
+    public function getIdPerson()
+    {
+        return $this->idPerson;
+    }
+
+    
+
+    /**
+     * Add room
+     *
+     * @param \AppBundle\Entity\Room $room
+     *
+     * @return House
+     */
+    public function addRoom(\AppBundle\Entity\Room $room)
+    {
+        $this->rooms[] = $room;
+
+        return $this;
+    }
+
+    /**
+     * Remove room
+     *
+     * @param \AppBundle\Entity\Room $room
+     */
+    public function removeRoom(\AppBundle\Entity\Room $room)
+    {
+        $this->rooms->removeElement($room);
+    }
+
+    /**
+     * Get rooms
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRooms()
+    {
+        return $this->rooms;
+    }
+
+    public function __toString() {
+        return $this->name;
+    }
 }
-

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Casas{% endblock %}
+{% block body %}
+
+<div class="container-fluid">
+    <div class="table-responsive table--no-card m-b-30">
+        <table class="table table-borderless table-striped table-earning">
+            <thead>
+            <tr>
+
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Latitud</th>
+                <th>Longitud</th>
+                <th>Foto</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for house in houses %}
+                <tr>
+                    <td>{{ house.id }}</td>
+                    <td>{{ house.name }}</td>
+                    <td>{{ house.latitude }}</td>
+                    <td>{{ house.longitude }}</td>
+                    <td><img src="{{ asset('uploads/photos/'~house.photo)|default(asset('assets/images/icon/avatar-big-01.jpg')) }}" style="width: auto; height: 80px"></td>
+                    <td>
+                        <div class="table-data-feature">
+                            <a href="{{ path('house_show', { 'id': house.id }) }}" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver">
+                                <i class="zmdi zmdi-eye"></i>
+                            </a>
+                            <a href="{{ path('house_edit', { 'id': house.id }) }}" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
+                                <i class="zmdi zmdi-edit"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td>No data</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-data__tool">
+        <div class="table-data__tool-right">
+            <a class="au-btn au-btn--blue2 btn-sm" href="{{ path('house_new', {'id':app.user.person.id}) }}">Agregar</a>
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}

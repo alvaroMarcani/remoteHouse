@@ -1,0 +1,15 @@
+# messages.es.yml
+
+#App Texts
+appName: Remote House
+
+#Buttons
+back: Regresar
+edit: Editar
+delete: Eliminar
+save: Guardar
+new: Nuevo
+register: Registrarse
+
+#Options Text used for Type/Controller
+ph.select: --Seleccione una Opcion--

@@ -1,0 +1,17 @@
+{#{% extends 'base.html.twig' %}#}
+
+{% block body %}
+    <h1>Room creation</h1>
+
+    {{ form_start(form, {'action': path('demo'), 'method': 'GET'}) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create2" />
+        {#<a href="{{ path('demo', {'name':house.id,'idHouse/'}) }}">demo</a>#}
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('room_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -6,11 +6,13 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: es
+    photos_directory: '%kernel.project_dir%/web/uploads/photos'
+    pdf_directory: '%kernel.project_dir%/web/uploads/pdf'
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -76,7 +78,7 @@ sensio_framework_extra:
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
-    user_class: AppBundle\Entity\User
+    user_class: AppBundle\Entity\Usuario
     from_email:
         address: "noresponder@remotehouse.com"
         sender_name: "noresponder@remotehouse.com"

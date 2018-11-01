@@ -1,0 +1,57 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Room
+ *
+ * @ORM\Table(name="room", indexes={@ORM\Index(name="fk_room_house1_idx", columns={"id_house"})})
+ * @ORM\Entity
+ */
+class Room
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=45, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="door", type="boolean", nullable=false)
+     */
+    private $door;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="light", type="boolean", nullable=false)
+     */
+    private $light;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \AppBundle\Entity\House
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\House")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_house", referencedColumnName="id")
+     * })
+     */
+    private $idHouse;
+
+
+}
+

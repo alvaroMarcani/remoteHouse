@@ -1,0 +1,299 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <style>
+        /* Loading Spinner */
+        .spinner{margin:0;width:70px;height:18px;margin:-35px 0 0 -9px;position:absolute;top:50%;left:50%;text-align:center}.spinner > div{width:18px;height:18px;background-color:#333;border-radius:100%;display:inline-block;-webkit-animation:bouncedelay 1.4s infinite ease-in-out;animation:bouncedelay 1.4s infinite ease-in-out;-webkit-animation-fill-mode:both;animation-fill-mode:both}.spinner .bounce1{-webkit-animation-delay:-.32s;animation-delay:-.32s}.spinner .bounce2{-webkit-animation-delay:-.16s;animation-delay:-.16s}@-webkit-keyframes bouncedelay{0%,80%,100%{-webkit-transform:scale(0.0)}40%{-webkit-transform:scale(1.0)}}@keyframes bouncedelay{0%,80%,100%{transform:scale(0.0);-webkit-transform:scale(0.0)}40%{transform:scale(1.0);-webkit-transform:scale(1.0)}}
+    </style>
+    <meta charset="UTF-8">
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <title> Login </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Favicons -->
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('assets/theme/images/icons/apple-touch-icon-144-precomposed.png')}}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('assets/theme/images/icons/apple-touch-icon-114-precomposed.png')}}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('assets/theme/images/icons/apple-touch-icon-72-precomposed.png')}}">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/theme/images/icons/apple-touch-icon-57-precomposed.png')}}">
+    <link rel="shortcut icon" href="{{ asset('assets/theme/images/icons/favicon.png')}}">
+
+
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/bootstrap/css/bootstrap.css')}}">
+
+
+    <!-- HELPERS -->
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/helpers/animate.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/helpers/backgrounds.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/helpers/boilerplate.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/helpers/border-radius.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/helpers/grid.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/helpers/page-transitions.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/helpers/spacing.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/helpers/typography.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/helpers/utils.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/helpers/colors.css')}}">
+
+    <!-- ELEMENTS -->
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/badges.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/buttons.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/content-box.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/dashboard-box.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/forms.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/images.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/info-box.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/invoice.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/loading-indicators.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/menus.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/panel-box.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/response-messages.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/responsive-tables.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/ribbon.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/social-box.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/tables.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/tile-box.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/elements/timeline.css')}}">
+
+
+
+    <!-- ICONS -->
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/icons/fontawesome/fontawesome.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/icons/linecons/linecons.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/icons/spinnericon/spinnericon.css')}}">
+
+
+
+
+    <!-- SNIPPETS -->
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/snippets/chat.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/snippets/files-box.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/snippets/login-box.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/snippets/notification-box.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/snippets/progress-box.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/snippets/todo.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/snippets/user-profile.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/snippets/mobile-navigation.css')}}">
+
+    <!-- APPLICATIONS -->
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/applications/mailbox.css')}}">
+
+    <!-- Admin theme -->
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/themes/admin/layout.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/themes/admin/color-schemes/default.css')}}">
+
+    <!-- Components theme -->
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/themes/components/default.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/themes/components/border-radius.css')}}">
+
+    <!-- Admin responsive -->
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/helpers/responsive-elements.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/theme/helpers/admin-responsive.css')}}">
+
+    <!-- JS Core -->
+
+    <script type="text/javascript" src="{{ asset('assets/theme/js-core/jquery-core.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/theme/js-core/jquery-ui-core.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/theme/js-core/jquery-ui-widget.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/theme/js-core/jquery-ui-mouse.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/theme/js-core/jquery-ui-position.js')}}"></script>
+    <!--<script type="text/javascript" src="../../assets/js-core/transition.js"></script>-->
+    <script type="text/javascript" src="{{ asset('assets/theme/js-core/modernizr.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/theme/js-core/jquery-cookie.js')}}"></script>
+
+
+
+
+
+    <script type="text/javascript">
+        $(window).load(function(){
+            setTimeout(function() {
+                $('#loading').fadeOut( 400, "linear" );
+            }, 300);
+        });
+    </script>
+
+
+
+</head>
+<body>
+<div id="loading">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+<style type="text/css">
+
+    html,body {
+        height: 100%;
+        background: #fff;
+    }
+
+</style>
+
+<div class="center-vertical">
+    <div class="center-content row">
+
+
+
+        <form action="{{ path("fos_user_security_check") }}" id="login-validation" class="col-md-4 col-sm-5 col-xs-11 col-lg-3 center-margin" method="post">
+            {% if csrf_token %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            {% endif %}
+            <!-- <h3 class="text-center pad25B font-gray text-transform-upr font-size-23">Monarch Admin <span class="opacity-80">v1.0</span></h3> -->
+            <div id="login-form" class="content-box bg-default">
+                <div class="content-box-wrapper pad20A">
+                    <img class="mrg25B center-margin display-block" width="140" src="{{ asset('images/safer-final.png')}}" alt="">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon addon-inside bg-gray">
+                                <i class="glyph-icon icon-envelope-o"></i>
+                            </span>
+
+                            <input type="text" id="username" class="form-control" name="_username" value="{{ last_username }}" required="required" autocomplete="username" placeholder="{{ 'security.login.username'|trans }}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon addon-inside bg-gray">
+                                <i class="glyph-icon icon-unlock-alt"></i>
+                            </span>
+                            <input type="password" class="form-control" id="password" name="_password" required="required" autocomplete="current-password" placeholder="{{ 'security.login.password'|trans }}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-block btn-primary">{{ 'security.login.submit'|trans }}</button>
+                    </div>
+                    <div class="row">
+                        <div class="checkbox-primary col-md-6" style="height: 20px;">
+                            <label>
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" class="custom-checkbox" />
+                                {{ 'security.login.remember_me'|trans }}
+                            </label>
+                        </div>
+                        <div class="text-right col-md-6">
+                            {#<a href="{{ path('fos_user_resetting_request') }}" class="switch-button" switch-target="#login-forgot" switch-parent="#login-form" title="Recover password">Perdiste tu contraseña?</a>#}
+                            <a href="{{ path('fos_user_resetting_request') }}" title="Recover password">Perdiste tu contraseña?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="login-forgot" class="content-box bg-default hide">
+                <div class="content-box-wrapper pad20A">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail2">Email address:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon addon-inside bg-gray">
+                                <i class="glyph-icon icon-envelope-o"></i>
+                            </span>
+                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+                        </div>
+                    </div>
+                </div>
+                <div class="button-pane text-center">
+                    <button type="submit" class="btn btn-md btn-primary">Recover Password</button>
+                    <a href="#" class="btn btn-md btn-link switch-button" switch-target="#login-form" switch-parent="#login-forgot" title="Cancel">Cancel</a>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+
+<!-- WIDGETS -->
+
+<script type="text/javascript" src="{{ asset('assets/theme/bootstrap/js/bootstrap.js')}}"></script>
+
+<!-- Bootstrap Dropdown -->
+
+<!-- <script type="text/javascript" src="../../assets/widgets/dropdown/dropdown.js"></script> -->
+
+<!-- Bootstrap Tooltip -->
+
+<!-- <script type="text/javascript" src="../../assets/widgets/tooltip/tooltip.js"></script> -->
+
+<!-- Bootstrap Popover -->
+
+<!-- <script type="text/javascript" src="../../assets/widgets/popover/popover.js"></script> -->
+
+<!-- Bootstrap Progress Bar -->
+
+<script type="text/javascript" src="{{ asset('assets/theme/widgets/progressbar/progressbar.js')}}"></script>
+
+<!-- Bootstrap Buttons -->
+
+<!-- <script type="text/javascript" src="../../assets/widgets/button/button.js"></script> -->
+
+<!-- Bootstrap Collapse -->
+
+<!-- <script type="text/javascript" src="../../assets/widgets/collapse/collapse.js"></script> -->
+
+<!-- Superclick -->
+
+<script type="text/javascript" src="{{ asset('assets/theme/widgets/superclick/superclick.js')}}"></script>
+
+<!-- Input switch alternate -->
+
+<script type="text/javascript" src="{{ asset('assets/theme/widgets/input-switch/inputswitch-alt.js')}}"></script>
+
+<!-- Slim scroll -->
+
+<script type="text/javascript" src="{{ asset('assets/theme/widgets/slimscroll/slimscroll.js')}}"></script>
+
+<!-- Slidebars -->
+
+<script type="text/javascript" src="{{ asset('assets/theme/widgets/slidebars/slidebars.js')}}"></script>
+<script type="text/javascript" src="{{ asset('assets/theme/widgets/slidebars/slidebars-demo.js')}}"></script>
+
+<!-- PieGage -->
+
+<script type="text/javascript" src="{{ asset('assets/theme/widgets/charts/piegage/piegage.js')}}"></script>
+<script type="text/javascript" src="{{ asset('assets/theme/widgets/charts/piegage/piegage-demo.js')}}"></script>
+
+<!-- Screenfull -->
+
+<script type="text/javascript" src="{{ asset('assets/theme/widgets/screenfull/screenfull.js')}}"></script>
+
+<!-- Content box -->
+
+<script type="text/javascript" src="{{ asset('assets/theme/widgets/content-box/contentbox.js')}}"></script>
+
+<!-- Overlay -->
+
+<script type="text/javascript" src="{{ asset('assets/theme/widgets/overlay/overlay.js')}}"></script>
+
+<!-- Widgets init for demo -->
+
+<script type="text/javascript" src="{{ asset('assets/theme/js-init/widgets-init.js')}}"></script>
+
+<!-- Theme layout -->
+
+<script type="text/javascript" src="{{ asset('assets/theme/themes/admin/layout.js')}}"></script>
+
+<!-- Theme switcher -->
+
+<script type="text/javascript" src="{{ asset('assets/theme/widgets/theme-switcher/themeswitcher.js')}}"></script>
+
+</body>
+</html>

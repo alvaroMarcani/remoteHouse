@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>People list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Lastname</th>
+                <th>Photo</th>
+                <th>Staticphoto</th>
+                <th>Birthdate</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for person in people %}
+            <tr>
+                <td><a href="{{ path('person_show', { 'id': person.id }) }}">{{ person.name }}</a></td>
+                <td>{{ person.lastName }}</td>
+                <td>{{ person.photo }}</td>
+                <td>{{ person.staticPhoto }}</td>
+                <td>{% if person.birthdate %}{{ person.birthdate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ person.gender }}</td>
+                <td>{{ person.email }}</td>
+                <td>{{ person.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('person_show', { 'id': person.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('person_edit', { 'id': person.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('person_new') }}">Create a new person</a>
+        </li>
+    </ul>
+{% endblock %}

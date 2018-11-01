@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Casa{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/gmap-house.css') }}"/>
+{% endblock %}
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="map-data m-b-40">
+                    <h3 class="title-3 m-b-30">
+                        <i class="zmdi zmdi-map"></i>Editar Ubicacion</h3>
+                    {#<input id="pac-input" class="controls" type="text" placeholder="Search Box">#}
+
+                    <!-- Google Maps -->
+
+                    <div class="pac-card" id="pac-card">
+                        <div id="title">
+                            Buscar Domicilio
+                        </div>
+                        <div id="pac-container">
+                            <input id="pac-input" type="text"
+                                   placeholder="Ingrese una direccion" >
+                        </div>
+                    </div>
+
+                    <div id="map" style="height: 400px;width: 100%;"></div>
+
+                    <!-- End Google Maps-->
+
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <strong>Datos</strong><small> Nueva Casa</small>
+            </div>
+            <div class="card-body">
+                <div class="login-form">
+                    {{ form_start(edit_form) }}
+                    {{ form_row(edit_form.name) }}
+                    {{ form_row(edit_form.latitude) }}
+                    {{ form_row(edit_form.longitude) }}
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mx-auto d-block">
+                                <img class="mx-auto d-block" id="image_preview" src="{{ asset('uploads/photos/'~house.photo)|default(asset('assets/images/icon/avatar-big-01.jpg')) }}" alt="" height="450px" width="450px">
+                                {#<img id="image_preview" class=" mx-auto d-block" src="" height="450px" width="450px">#}
+                            </div>
+                            {{ form_row(edit_form.photo) }}
+                        </div>
+                    </div>
+
+
+                    {{ form_widget(edit_form) }}
+                    <input class="au-btn au-btn--block au-btn--green m-b-20" type="submit" value="{{ 'save'|trans }}" />
+                    {{ form_end(edit_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-data__tool">
+        <div class="table-data__tool-right">
+            <a class="au-btn au-btn--blue2 btn-sm" href="{{ path('house_index') }}">Regresar</a>
+            {{ form_start(delete_form) }}
+            <input class="au-btn btn-danger btn-sm m-t-5" type="submit" value="Eliminar">
+            {{ form_end(delete_form) }}
+            {#<a class="btn btn-secondary btn-sm" href="{{ path('person_index') }}">Back to the list</a>#}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/gmap-house.js') }}"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ-5siJeJh7kO5hYqC1w8pU5c8PF40_QA&libraries=places&callback=initMap">
+    </script>
+    <script>
+        $(document).ready(function () {
+            lat=$('#appbundle_house_latitude').val();
+            long=$('#appbundle_house_longitude').val();
+            loadStoredMarker(lat,long);
+            $("#appbundle_house_photo").change(function() {
+                imagePreview(this);
+            });
+        });
+    </script>
+{% endblock %}
