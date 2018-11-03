@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Room
  *
@@ -16,20 +16,21 @@ class Room
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=45, nullable=false)
+     * @Assert\NotBlank(message="form.notblank")
      */
     private $name;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="door", type="boolean", nullable=false)
+     * @ORM\Column(name="door", type="boolean", nullable=true)
      */
     private $door;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="light", type="boolean", nullable=false)
+     * @ORM\Column(name="light", type="boolean", nullable=true)
      */
     private $light;
 
@@ -49,6 +50,7 @@ class Room
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_house", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="form.notblank")
      */
     private $idHouse;
 

@@ -1,0 +1,53 @@
+.room-bg{
+    background-color: black;
+    background-image: url('../img/room-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: inherit;
+    height: 500px;
+    width: 100%;
+    margin: auto;
+}
+
+.room-on{
+    background-color: black;
+    background-image: url('../img/room-on.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: inherit;
+    height: 500px;
+    width: 100%;
+    margin: auto;
+}
+
+.room-off{
+    background-color: black;
+    background-image: url('../img/room-off.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: inherit;
+    height: 500px;
+    width: 100%;
+    margin: auto;
+}
+
+.door-style{
+    height: 150px;
+    width: auto;
+    position: absolute;
+    left: 50%;
+    top:37%;
+    margin-left: -5%;
+}
+
+.light-style{
+    height: 85px;
+    width: auto;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    margin-left: -6%;
+}

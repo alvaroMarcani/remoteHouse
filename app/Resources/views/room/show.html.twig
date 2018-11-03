@@ -1,41 +1,99 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Administracion Habitacion{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/bootstrap-toggle.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/room.css') }}" rel="stylesheet">
+{% endblock %}
 {% block body %}
 
-    <h1>Room</h1>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <strong class="title-3 m-b-30">
+                <i class="zmdi zmdi-settings"></i>Administracion:
+            </strong>
+            <span>{{ room.name }}</span>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-7">
+                    <div id="room_bg" class="room-bg">
+                        <button type="button" id="actionLight"><img id="light" class="light-style" src="{{ asset('assets/img/light-off.png') }}"></button>
+                        <button type="button" id="actionDoor"><img id="door" class="door-style" src="{{ asset('assets/img/close.png') }}"></button>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong><i class="zmdi zmdi-info"></i>&nbsp; Detalles de la Habitacion</strong>
+                        </div>
+                        <div class="card-header">
+                            <table class="table table-dark">
+                                <tbody>
+                                <tr>
+                                    <th>Identificador</th>
+                                    <td>{{ room.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nombre de la Habitacion</th>
+                                    <td>{{ room.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Puerta principal</th>
+                                    <td>{% if room.door %}
+                                            <input id="toggle-door" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+                                        {% else %}
+                                            <input id="toggle-door"  type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Luces</th>
+                                    <td>{% if room.light %}
+                                            <input id="toggle-light" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+                                        {% else %}
+                                            <input id="toggle-light" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Domicilio</th>
+                                    <td>{{ room.idHouse.name }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Name</th>
-                <td>{{ room.name }}</td>
-            </tr>
-            <tr>
-                <th>Door</th>
-                <td>{% if room.door %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Light</th>
-                <td>{% if room.light %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ room.id }}</td>
-            </tr>
-        </tbody>
-    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <ul>
-        <li>
-            <a href="{{ path('room_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('room_edit', { 'id': room.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+
+{% endblock %}
+{% block javascripts %}
+    <script async defer type="text/javascript" src="{{ asset('assets/js/bootstrap-toggle.js') }}"></script>
+    <script async defer type="text/javascript" src="{{ asset('assets/js/room.js') }}"></script>
+    <script async defer type="text/javascript">
+        $(document).ready(function () {
+            $('#toggle-light').bootstrapToggle({
+                on: 'Encendido',
+                off: 'Apagado'
+            });
+            $('#toggle-door').bootstrapToggle({
+                on: 'Abierto',
+                off: 'Cerrado'
+            });
+            lightOn='{{ asset('assets/img/light-on.png') }}';
+            lightOff='{{ asset('assets/img/light-off.png') }}';
+            doorOn='{{ asset('assets/img/open.png') }}';
+            doorOff='{{ asset('assets/img/close.png') }}';
+            setDefault(lightOn,lightOff,doorOn,doorOff);
+            setRoom({{ room.light ? 'true' : 'false' }}, {{ room.door ? 'true' : 'false' }});
+
+        });
+    </script>
 {% endblock %}

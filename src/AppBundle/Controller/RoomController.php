@@ -2,8 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\AppBundle;
 use AppBundle\Entity\House;
 use AppBundle\Entity\Room;
+use AppBundle\Form\RoomType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -35,30 +37,62 @@ class RoomController extends Controller
     }
 
     /**
-     * Lists all room entities.
+     * List
      *
-     * @Route("/demo", name="demo")
-     * @Method({"GET", "POST"})
+     * @Route("/roomupdate", name="room_update")
+     * @Method("POST")
      */
-    public function demoAction(Request $request)
+    public function roomUpdateAction(Request $request)
     {
         var_dump($request->get('appbundle_room'));
+//        $room=$request->get('appbundle_room');
+        return new Response("///////////////////");
+    }
+
+
+    /**
+     * List
+     *
+     * @Route("/roomdelete/{id}", name="room_delete2")
+     * @Method({"DELETE","GET", "POST"})
+     */
+    public function delete2Action(Request $request, Room $room)
+    {
+
+        $form = $this->createDeleteForm($room);
+        $form->handleRequest($request);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($room);
+        $em->flush();
+
+        return $this->redirectToRoute('room_index');
+
+    }
+
+    /**
+     * List
+     *
+     * @Route("/addroom", name="add_room")
+     * @Method({"GET", "POST"})
+     */
+    public function addRoomAction(Request $request)
+    {
+//        var_dump($request->get('appbundle_room'));
+//        $room=$request->get('appbundle_room');
         $room = new Room();
-        $form = $this->createForm('AppBundle\Form\RoomType', $room);
+        $form = $this->createForm('AppBundle\Form\RoomType', $room, ['method' => $request->getMethod()]);
         $form->handleRequest($request);
         var_dump("nombre: ".$form["name"]->getData());
         if ($form->isSubmitted() && $form->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($room);
-//            $em->flush();
-            var_dump("good");
-//            return $this->redirectToRoute('room_show', array('id' => $room->getId()));
-        }else{
-            var_dump("bad");
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($room);
+            $em->flush();
+            $this->addFlash("success", "Se ha agregado correctamente un nuevo cuarto");
+            return $this->redirectToRoute('house_show', array('id' => $room->getIdHouse()->getId()));
         }
         $this->addFlash("warning", "El campo no puede estar vacio");
-        return new Response("data");
-//        return $this->redirectToRoute('house_index');
+        return $this->redirectToRoute('house_show', array('id' => $this->getUser()->getPerson()->getId()));
     }
 
     /**
@@ -132,20 +166,23 @@ class RoomController extends Controller
      * Deletes a room entity.
      *
      * @Route("/{id}", name="room_delete")
-     * @Method("DELETE")
+     * @Method({"DELETE", "GET", "POST"})
      */
     public function deleteAction(Request $request, Room $room)
     {
-        $form = $this->createDeleteForm($room);
-        $form->handleRequest($request);
+        var_dump("hola");
+//        $form = $this->createDeleteForm($room);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $em = $this->getDoctrine()->getManager();
+//            $em->remove($room);
+//            $em->flush();
+//            return $this->redirectToRoute('room_index');
+//        }
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($room);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('room_index');
+//        return $this->redirectToRoute('room_index');
+        return new Response("//////////////");
     }
 
     /**
@@ -163,4 +200,5 @@ class RoomController extends Controller
             ->getForm()
         ;
     }
+
 }

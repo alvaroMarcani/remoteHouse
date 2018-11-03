@@ -1,21 +1,26 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Editar Cuarto{% endblock %}
 {% block body %}
-    <h1>Room edit</h1>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h1>Editar: {{ room.name }}</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+                {{ form_start(edit_form) }}
+                {{ form_widget(edit_form) }}
+                <input class="au-btn au-btn--block au-btn--green m-b-20" type="submit" value="{{ 'save'|trans }}" />
+                {{ form_end(edit_form) }}
+            </div>
+        </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('room_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    </div>
+
+    <div class="table-data__tool">
+        <div class="table-data__tool-right">
+            <a class="au-btn au-btn--blue2 btn-sm" href="{{ path('house_show',{'id':room.idHouse.id}) }}">Regresar</a>
+            <a class="au-btn btn-danger btn-sm m-t-5" href="{{ path('room_delete2',{'id':room.id}) }}">Eliminar</a>
+        </div>
+    </div>
+
 {% endblock %}

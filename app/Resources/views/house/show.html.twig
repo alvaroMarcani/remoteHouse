@@ -2,10 +2,32 @@
 
 {% block title %}Ver Casa{% endblock %}
 {% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="sufee-alert alert with-close alert-{{ label }} alert-dismissible fade show">
+                {% if label=="danger" %}
+                    <span class="badge badge-pill badge-{{ label }}">Error</span>
+                {% endif %}
+                {% if label=="success" %}
+                    <span class="badge badge-pill badge-{{ label }}">Exito</span>
+                {% endif %}
+                {% if label=="warning" %}
+                    <span class="badge badge-pill badge-{{ label }}">Advertencia</span>
+                {% endif %}
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endfor %}
     <div class="container-fluid">
+        <a href="{{ path('house_edit',{'id':house.id}) }}" class="btn pull-right close m-4">
+            <i class="zmdi zmdi-edit"></i>&nbsp; Editar</a>
         <div class="user-data m-b-30">
             <h3 class="title-3 m-b-30">
-                <i class="zmdi zmdi-account-calendar"></i>Mi Casa: {{ app.user.person.fullName }}</h3>
+                <i class="zmdi zmdi-account-calendar"></i>Mi Casa: {{ app.user.person.fullName }}
+            </h3>
 
             <div class="row card-body">
                 <div class="col-md-6">
@@ -52,66 +74,48 @@
             <div class="card-body">
                 <div class="row">
 
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img class="card-img-top" src="{{ asset('assets/images/bg-title-01.jpg') }}" alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class="card-title">Titulo Cuarto</h4>
-                                <div class="table-data-feature">
-                                    <a href="{#{ path('house_show', { 'id': house.id }) }#}" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ver">
-                                        <i class="zmdi zmdi-eye"></i>
-                                    </a>
-                                    <a href="{#{ path('house_edit', { 'id': house.id }) }#}" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
-                                        <i class="zmdi zmdi-edit"></i>
-                                    </a>
+                    {% if house.rooms is not null %}
+                        {% for room in house.rooms %}
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <img class="card-img-top" src="{{ asset('assets/images/bg-title-01.jpg') }}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{ room.name }}</h4>
+                                        <p>Habitacion Agregada</p>
+                                        <div class="table-data-feature">
+                                            <a href="{{ path('room_edit', { 'id': room.id }) }}" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editar">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </a>
+                                            <a href="{{ path('room_show', { 'id': room.id }) }}" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Administrar">
+                                                <i class="zmdi zmdi-settings"></i>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+
+                        {% else %}
+
+                        {% endfor %}
+                    {% endif %}
 
 
-                    <div class="col-md-3 card align-middle">
-                        <div class="card-body">
-                            <a href="{{ path('demo') }}">
+                    {#<div class="col-md-3 card align-middle">#}
+                        <div class="m-4">
+                            <a href="#" type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal">
                                 <img height="200px" width="200px" src="{{ asset('assets/img/add-icon.png') }}"><br>
-                                <b style="padding-left: 45px" class="text-center align-items-center align-content-center text-lg-center">Agregar mas</b>
+                                <b class="text-center align-items-center align-content-center text-lg-center">Agregar mas</b>
                             </a>
                         </div>
-                    </div>
+                    {#</div>#}
 
                 </div>
 
 
-                {% if house.rooms is not null %}
-                    {% for room in house.rooms %}
 
-                        {% else %}
-
-                    {% endfor %}
-                {% endif %}
             </div>
         </div>
     </div>
-
-
-
-
-    <ul>
-        <li>
-            <a href="{{ path('house_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('house_edit', { 'id': house.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
-
-    <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
@@ -120,16 +124,12 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title">Agregar un Nuevo Cuarto</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Some text in the modal.</p>
+                    <p class="text-black-50">Agrega un nuevo cuarto y selecciona a que domicilio pertenece.</p>
                     {{ render(controller('AppBundle:Room:new')) }}
-                    {#{{ render(controller('AppBundle:SecurityClearence:show',{ 'id': securityClearence.id })) }}#}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
 
@@ -139,9 +139,6 @@
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('assets/js/gmap-house.js') }}"></script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ-5siJeJh7kO5hYqC1w8pU5c8PF40_QA&libraries=places&callback=initMap">
-    </script>
     <script>
         $(document).ready(function () {
             lat='{{ house.latitude }}';
@@ -152,5 +149,10 @@
                 $('#myInput').trigger('focus')
             })
         });
+    </script>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ-5siJeJh7kO5hYqC1w8pU5c8PF40_QA&libraries=places&callback=initMap"
+            defer
+    >
     </script>
 {% endblock %}

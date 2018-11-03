@@ -16,10 +16,13 @@ class RoomType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', null,[
+                'label'=>'Nombre del Cuarto'
+            ])
 //            ->add('door')
 //            ->add('light')
             ->add('idHouse', null,[
+                'label'=>'Selecciona el Domicilio',
                 'placeholder'=>'ph.select',
             ])
         ;
@@ -29,7 +32,7 @@ class RoomType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Room'
+            'data_class' => 'AppBundle\Entity\Room',
         ));
     }
 
