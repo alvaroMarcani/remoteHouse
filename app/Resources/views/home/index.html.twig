@@ -1,20 +1,33 @@
 {% extends 'base.html.twig' %}
 
-
+{% block title %}Inicio{% endblock %}
 {% block body %}
 
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <strong>HOLA</strong><small>data</small>
+                <strong>Mapa de Monitoreo</strong><small> Domicilios</small>
             </div>
             <div class="card-body">
-                <p>Probando probando</p>
+                <div id="map" style="height: 500px;width: 100%;"></div>
             </div>
         </div>
     </div>
 
 {% endblock %}
-
-
-
+{% block javascripts %}
+    <script src="{{ asset('assets/js/gmap-house.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            {% for house in app.user.person.houses %}
+            lat='{{ house.latitude }}';
+            long='{{ house.longitude }}';
+            loadStoredMarker(lat,long);
+            {% endfor %}
+        });
+    </script>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ-5siJeJh7kO5hYqC1w8pU5c8PF40_QA&libraries=places&callback=initMap"
+            defer>
+    </script>
+{% endblock %}

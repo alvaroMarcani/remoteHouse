@@ -8,7 +8,9 @@
 {% block body %}
 
 <div class="container-fluid">
+    <div class="loader-bg"><div class="loader"></div></div>
     <div class="card">
+
         <div class="card-header">
             <strong class="title-3 m-b-30">
                 <i class="zmdi zmdi-settings"></i>Administracion:
@@ -63,22 +65,34 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <div id="info-alert" class="alert alert-success" role="alert">
+                                Message
+                            </div>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 
+<div class="table-data__tool m-3">
+    <div class="table-data__tool-right">
+        <a class="au-btn au-btn--blue2 btn-sm" href="{{ path('house_show',{'id':room.idHouse.id}) }}">Regresar</a>
+    </div>
+</div>
 
 {% endblock %}
 {% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script async defer type="text/javascript" src="{{ asset('assets/js/bootstrap-toggle.js') }}"></script>
     <script async defer type="text/javascript" src="{{ asset('assets/js/room.js') }}"></script>
     <script async defer type="text/javascript">
         $(document).ready(function () {
+            $loading.hide();
             $('#toggle-light').bootstrapToggle({
                 on: 'Encendido',
                 off: 'Apagado'
@@ -91,7 +105,8 @@
             lightOff='{{ asset('assets/img/light-off.png') }}';
             doorOn='{{ asset('assets/img/open.png') }}';
             doorOff='{{ asset('assets/img/close.png') }}';
-            setDefault(lightOn,lightOff,doorOn,doorOff);
+            roomId='{{ room.id|default(0) }}';
+            setDefault(lightOn,lightOff,doorOn,doorOff, roomId);
             setRoom({{ room.light ? 'true' : 'false' }}, {{ room.door ? 'true' : 'false' }});
 
         });

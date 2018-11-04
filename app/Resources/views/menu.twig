@@ -1,4 +1,5 @@
 <!-- MENU SIDEBAR-->
+{% set roomsCount = 0 %}
 <aside class="menu-sidebar2">
     <div class="logo">
         <a href="{{ path('home') }}">
@@ -41,6 +42,7 @@
                                 <a href="{{ path('house_show', {'id':house.id}) }}">
                                     <i class="fas fa-home"></i>{{ house.name }}</a>
                             </li>
+                            {% set roomsCount = roomsCount+house.rooms|length %}
                         {% else %}
                             <li>
                                 <a href="{{ path('house_new', {'id':app.user.person.id}) }}">
@@ -51,9 +53,9 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="inbox.html">
+                    <a href="{{ path('room_index') }}">
                         <i class="fas fa-flag"></i>Cuartos</a>
-                    <span class="inbox-num">3</span>
+                    <span class="inbox-num">{{ roomsCount|default(0) }}</span>
                 </li>
                 <li class="has-sub">
                     <a class="btn disabled">

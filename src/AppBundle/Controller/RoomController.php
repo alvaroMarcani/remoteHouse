@@ -27,9 +27,16 @@ class RoomController extends Controller
      */
     public function indexAction()
     {
+
+        $person=$this->getUser()->getPerson();
+
         $em = $this->getDoctrine()->getManager();
 
-        $rooms = $em->getRepository('AppBundle:Room')->findAll();
+        if($person!=null){
+            $rooms=$em->getRepository('AppBundle:Room')->getAllRoomsByPersona($person);
+        }else{
+            $rooms = $em->getRepository('AppBundle:Room')->findAll();
+        }
 
         return $this->render('room/index.html.twig', array(
             'rooms' => $rooms,
@@ -39,14 +46,55 @@ class RoomController extends Controller
     /**
      * List
      *
-     * @Route("/roomupdate", name="room_update")
+     * @Route("/lightupdate", name="light_update", options={"expose"=true}, name="light_update")
+     * @Method({"GET", "POST"})
+     */
+    public function lightUpdateAction(Request $request)
+    {
+        $data=$request->query->all();
+        $em=$this->getDoctrine()->getManager();
+        if(array_key_exists("id",$data)){
+            $id=$data['id'];
+            $room=$em->getRepository('AppBundle:Room')->findOneById($id);
+            if($room!=null&array_key_exists("status",$data)){
+                $status=false;
+                if($data['status']=="true"){
+                    $status=true;
+                }
+                $room->setLight($status);
+                $em->persist($room);
+                $em->flush();
+                return new Response("true");
+            }
+        }
+        return new Response("false");
+    }
+
+    /**
+     * List
+     *
+     * @Route("/doorupdate", name="door_update", options={"expose"=true}, name="door_update")
      * @Method("POST")
      */
-    public function roomUpdateAction(Request $request)
+    public function doorUpdateAction(Request $request)
     {
-        var_dump($request->get('appbundle_room'));
-//        $room=$request->get('appbundle_room');
-        return new Response("///////////////////");
+       $data=$request->query->all();
+        $em=$this->getDoctrine()->getManager();
+        if(array_key_exists("id",$data)){
+            $id=$data['id'];
+            $room=$em->getRepository('AppBundle:Room')->findOneById($id);
+            if($room!=null&array_key_exists("status",$data)){
+                $status=false;
+                if($data['status']=="true"){
+                    $status=true;
+                }
+                $room->setDoor($status);
+                $em->persist($room);
+                $em->flush();
+                return new Response("true");
+            }
+        }
+        return new Response("false");
     }
 
 

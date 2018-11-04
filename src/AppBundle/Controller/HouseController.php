@@ -7,7 +7,8 @@ use AppBundle\Entity\Person;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * House controller.
@@ -49,7 +50,7 @@ class HouseController extends Controller
         $house = new House();
         $form = $this->createForm('AppBundle\Form\HouseType', $house);
         $form->handleRequest($request);
-        var_dump( $form->getClickedButton()->getName());
+//        var_dump( $form->getClickedButton()->getName());
 
         if ($form->isSubmitted() && $form->isValid()) {
 
