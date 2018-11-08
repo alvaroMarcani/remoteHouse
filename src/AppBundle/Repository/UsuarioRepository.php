@@ -41,8 +41,7 @@ class UsuarioRepository extends EntityRepository
         $em->flush();
 
         $userManager->updateUser($usuario);
-
-        $persona->setIdUsuario($usuario);
+        $persona->setUsuario($usuario);
 
         return $passwd;
     }

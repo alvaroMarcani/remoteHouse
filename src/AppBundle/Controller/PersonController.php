@@ -58,7 +58,7 @@ class PersonController extends Controller
 
                 $passwd = $em->getRepository('AppBundle:Usuario')->createUsuarioFromPersona($person, $this->container->get('fos_user.user_manager'));
                 if (!$passwd){
-                    var_dump($passwd);
+                    var_dump("password: ".$passwd);
                     $this->addFlash('danger', 'No se pudo crear el usuario');
                 }
                 else {
