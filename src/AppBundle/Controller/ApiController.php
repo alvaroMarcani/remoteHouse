@@ -36,18 +36,53 @@ class ApiController extends Controller
         $data=$request->query->all();
         $em=$this->getDoctrine()->getManager();
         $jsonArray=[];
-        if(array_key_exists('id',$data)&array_key_exists('token',$data)){
+//        if(array_key_exists('id',$data)&array_key_exists('token',$data)){
+        if(array_key_exists('id',$data)) {
+            $id = $data['id'];
+            $room = $em->getRepository('AppBundle:Room')->findOneById($id);
+            if ($room != null) {
+                $jsonArray = [
+                    'id' => $room->getId(),
+                    'light' => $room->getLight(),
+                    'door' => $room->getDoor(),
+                ];
+            } else {
+                $jsonArray = [
+                    'status' => 'no data',
+                ];
+            }
+        }else{
+            $jsonArray=[
+                'status'=>'error',
+            ];
+        }
+        return new JsonResponse($jsonArray);
+    }
+
+    /**
+     * Read id and find it to set their values with boolean params (light turn on/off, door close/open)
+     * @Route("/roomset", name="room_set")
+     * @Method({"GET","POST"})
+     */
+    public function setStatusAction(Request $request)
+    {
+        $data=$request->query->all();
+        $em=$this->getDoctrine()->getManager();
+        $jsonArray=[];
+//        if(array_key_exists('id',$data)&array_key_exists('token',$data)){
+        if(array_key_exists('id',$data)&&array_key_exists('room',$data)&&array_key_exists('light',$data)) {
             $id=$data['id'];
             $room=$em->getRepository('AppBundle:Room')->findOneById($id);
-            if($room!=null){
-                $jsonArray=[
-                  'id'=>$room->getId(),
-                  'light'=>$room->getLight(),
-                  'door'=>$room->getDoor(),
-                ];
+            if($room!=null) {
+                $light = ($data['light'] === 'true');
+                $door = ($data['door'] === 'true');
+                $room->setLight($light);
+                $room->setDoor($door);
+                $em->persist($room);
+                $em->flush();
             }else{
                 $jsonArray=[
-                  'status'=>'no data',
+                    'status'=>'not found',
                 ];
             }
         }else{

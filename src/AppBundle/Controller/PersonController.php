@@ -23,6 +23,7 @@ class PersonController extends Controller
      */
     public function indexAction()
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $em = $this->getDoctrine()->getManager();
 
         $people = $em->getRepository('AppBundle:Person')->findAll();
