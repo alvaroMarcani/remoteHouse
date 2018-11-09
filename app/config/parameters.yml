@@ -1,15 +1,15 @@
 # This file is auto-generated during the composer install
 parameters:
-#    database_host: 127.0.0.1
-    database_host: sql10.freemysqlhosting.net
-#    database_port: null
-    database_port: 3306
-#    database_name: remotehousedb
-    database_name: sql10264662
-#    database_user: root
-    database_user: sql10264662
-#    database_password: null
-    database_password: PEpKke8UI6
+    database_host: 127.0.0.1
+#    database_host: sql10.freemysqlhosting.net
+    database_port: null
+#    database_port: 3306
+    database_name: remotehousedb
+#    database_name: sql10264662
+    database_user: root
+#    database_user: sql10264662
+    database_password: null
+#    database_password: PEpKke8UI6
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
